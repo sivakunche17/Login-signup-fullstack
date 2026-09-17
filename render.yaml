@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: employee-record-manager
+    name: Login-signup-fullstack
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
