@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - PyAuth System{% endblock %}
+
+{% block flash_class %}flash-container-wide{% endblock %}
+
+{% block content %}
+<div class="page-container-wide">
+  <!-- Top Session Status & Action Banner -->
+  <div class="dashboard-hero">
+    <div class="dashboard-hero-user">
+      <div class="user-avatar-large">
+        {{ username[0]|upper }}
+      </div>
+      <div>
+        <h1 class="dashboard-hero-title">
+          Welcome back, <span class="highlight">{{ username }}</span>!
+        </h1>
+        <p class="dashboard-hero-subtitle">
+          You are logged into your Python Auth System session.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <a href="{{ url_for('logout') }}" class="btn-secondary btn-danger">
+        <span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Dashboard 2-column Grid -->
+  <div class="dashboard-grid">
+    <!-- User Profile Card -->
+    <div class="glass-card">
+      <div class="dashboard-card-header">
+        <div class="dashboard-card-title-group">
+          <span class="material-symbols-outlined" style="color: var(--primary);">badge</span>
+          <h2 class="dashboard-card-title">User Profile</h2>
+        </div>
+        <span class="badge-status-active">
+          <span class="pulse-dot"></span>
+          <span>Active</span>
+        </span>
+      </div>
+
+      <div class="profile-avatar-center">
+        <div class="profile-avatar-circle">
+          <div class="profile-avatar-inner">
+            {{ username[0]|upper }}
+          </div>
+        </div>
+        <div class="profile-username">{{ username }}</div>
+        <div style="font-size: 0.8rem; color: var(--outline);">Authenticated User</div>
+      </div>
+
+      <div class="profile-meta-list">
+        <div class="meta-item">
+          <span class="meta-label">Account Status</span>
+          <div class="meta-value">
+            <span class="material-symbols-outlined" style="color: var(--tertiary);">verified_user</span>
+            <span>Active &bull; Authenticated</span>
+          </div>
+        </div>
+
+        <div class="meta-item">
+          <span class="meta-label">Session Runtime</span>
+          <div class="meta-value">
+            <span class="material-symbols-outlined" style="color: var(--primary);">terminal</span>
+            <span>Python Flask Backend</span>
+          </div>
+        </div>
+
+        <div class="meta-item">
+          <span class="meta-label">Storage Engine</span>
+          <div class="meta-value">
+            <span class="material-symbols-outlined" style="color: var(--secondary);">data_object</span>
+            <span>Python Memory (userdata dict)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-banner-mini">
+        <span class="material-symbols-outlined" style="color: var(--outline); font-size: 18px;">info</span>
+        <span>Session secured with Flask signed cookies. Memory data resets on server restart.</span>
+      </div>
+    </div>
+
+    <!-- Change Password Card -->
+    <div class="glass-card">
+      <div class="dashboard-card-header">
+        <div class="dashboard-card-title-group">
+          <span class="material-symbols-outlined" style="color: var(--primary);">lock_reset</span>
+          <h2 class="dashboard-card-title">Change Password</h2>
+        </div>
+        <span style="font-size: 0.75rem; color: var(--outline);">Flask Form Handler</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--on-surface-variant); margin-bottom: 1.25rem;">
+        Update your account password. Requires your current password and strict validation.
+      </p>
+
+      <form action="{{ url_for('change_password') }}" method="POST">
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="current_password" class="form-label">Current Password</label>
+          </div>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">key</span>
+            <input
+              type="password"
+              id="current_password"
+              name="current_password"
+              class="form-input"
+              placeholder="Enter current password"
+              required
+              autocomplete="current-password"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="new_password" class="form-label">New Password</label>
+            <span class="form-hint">6-8 chars</span>
+          </div>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">lock</span>
+            <input
+              type="password"
+              id="new_password"
+              name="new_password"
+              class="form-input"
+              placeholder="Enter new password"
+              required
+              autocomplete="new-password"
+            >
+          </div>
+          <div class="field-rules-note">
+            <span class="material-symbols-outlined" style="font-size: 14px;">info</span>
+            <span>6-8 characters, 1+ uppercase, 1+ digit</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="confirm_password" class="form-label">Confirm New Password</label>
+          </div>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">lock_reset</span>
+            <input
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              class="form-input"
+              placeholder="Confirm new password"
+              required
+              autocomplete="new-password"
+            >
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="submit" class="btn-primary">
+            <span>Update Password</span>
+            <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
